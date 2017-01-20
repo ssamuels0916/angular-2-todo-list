@@ -1,0 +1,27 @@
+
+<section class="todoapp">
+    <header class="header">
+        <h1>{{name}}</h1>
+        <input class="new-to" placeholder="what needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+    </header>
+    <section class="main" *ngIf="todos.length > 0">
+        <ul class="todo-list">
+            <!--*ngFor="let todo of todos": loop over all todo’s and assign current todo to a variable called todo for each iteration
+-->
+<!--[class.completed]="todo.complete": apply CSS class complete to li element when todo.complete is truthy-->
+            <li *ngFor=" let todo of todos" [class.completed]="todo.complete">
+                <div class="view"> <!-- display todo details for each todo -->
+                <!-- assign the value of todo.complete to the property checked of the element-->
+                    <input class ="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+                    <label>{{todo.title}}</label>
+                    <!--(click)="removeTodo(todo)": execute removeTodo(todo) when the destroy button is clicked
+-->
+                    <button class="destroy" (click)="removeTodo(todo)"></button>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <footer class="footer" *ngIf="todos.length >0">
+        <span class="todo-count"><strong>{{todo.length}}</strong>{{todos.length == 1 ? 'item': 'items'}} left</span>
+    </footer>
+</section>
